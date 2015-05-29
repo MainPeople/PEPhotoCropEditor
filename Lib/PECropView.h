@@ -17,6 +17,7 @@
 @property (nonatomic, readonly) CGRect zoomedCropRect;
 @property (nonatomic, readonly) CGAffineTransform rotation;
 @property (nonatomic, readonly) BOOL userHasModifiedCropArea;
+@property (nonatomic, readonly) PECropRectView *cropRectView;
 
 @property (nonatomic) BOOL keepingCropAspectRatio;
 @property (nonatomic) CGFloat cropAspectRatio;
@@ -32,5 +33,13 @@
 - (void)resetCropRectAnimated:(BOOL)animated;
 
 - (void)setRotationAngle:(CGFloat)rotationAngle snap:(BOOL)snap;
+
+- (void)hideCropRectView;
+
+- (void)showCropRectView;
+
+- (void)animateSolidOverlay;
+
+- (void)animateTransparentOverlay;
 
 @end

@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 kishikawa katsumi. All rights reserved.
 //
 
+#import <PEPhotoCropEditor/PECropRectView.h>
 #import "PECropView.h"
 #import "PECropRectView.h"
 #import "UIImage+PECrop.h"
@@ -60,7 +61,7 @@ static const CGFloat MarginLeft = 20.0f;
 - (void)commonInit
 {
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor blackColor];
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     self.scrollView.delegate = self;
@@ -73,7 +74,8 @@ static const CGFloat MarginLeft = 20.0f;
     self.scrollView.bouncesZoom = NO;
     self.scrollView.clipsToBounds = NO;
     [self addSubview:self.scrollView];
-    
+
+
     UIRotationGestureRecognizer *rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)];
     rotationGestureRecognizer.delegate = self;
     _rotationGestureRecognizer = rotationGestureRecognizer;
@@ -84,20 +86,52 @@ static const CGFloat MarginLeft = 20.0f;
     [self addSubview:self.cropRectView];
     
     self.topOverlayView = [[UIView alloc] init];
-    self.topOverlayView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
+    self.topOverlayView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.topOverlayView.alpha = 0.4f;
     [self addSubview:self.topOverlayView];
     
     self.leftOverlayView = [[UIView alloc] init];
-    self.leftOverlayView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
+    self.leftOverlayView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.leftOverlayView.alpha = 0.4f;
     [self addSubview:self.leftOverlayView];
     
     self.rightOverlayView = [[UIView alloc] init];
-    self.rightOverlayView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
+    self.rightOverlayView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.rightOverlayView.alpha = 0.4f;
     [self addSubview:self.rightOverlayView];
     
     self.bottomOverlayView = [[UIView alloc] init];
-    self.bottomOverlayView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
+    self.bottomOverlayView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+    self.bottomOverlayView.alpha = 0.4f;
     [self addSubview:self.bottomOverlayView];
+}
+
+- (void)hideCropRectView {
+    self.cropRectView.hidden = YES;
+    self.userInteractionEnabled = NO;
+}
+
+- (void)showCropRectView {
+    self.cropRectView.hidden = NO;
+    self.userInteractionEnabled = YES;
+}
+
+- (void)animateSolidOverlay {
+    [UIView animateWithDuration:0.2f animations:^{
+        self.topOverlayView.alpha = 1.0f;
+        self.bottomOverlayView.alpha = 1.0f;
+        self.leftOverlayView.alpha = 1.0f;
+        self.rightOverlayView.alpha = 1.0f;
+    }];
+}
+
+- (void)animateTransparentOverlay {
+    [UIView animateWithDuration:0.2f animations:^{
+        self.topOverlayView.alpha = 0.4f;
+        self.bottomOverlayView.alpha = 0.4f;
+        self.leftOverlayView.alpha = 0.4f;
+        self.rightOverlayView.alpha = 0.4f;
+    }];
 }
 
 #pragma mark -
