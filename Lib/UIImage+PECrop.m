@@ -21,7 +21,7 @@
     CGImageRef croppedImage = CGImageCreateWithImageInRect(rotatedImage.CGImage, cropRect);
     UIImage *image = [UIImage imageWithCGImage:croppedImage scale:self.scale orientation:rotatedImage.imageOrientation];
     CGImageRelease(croppedImage);
-    
+
     return image;
 }
 

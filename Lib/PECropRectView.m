@@ -107,7 +107,8 @@
         if (self.showsGridMinor) {
             for (NSInteger j = 1; j < 3; j++) {
                 [[UIColor colorWithRed:1.0f green:1.0f blue:0.0f alpha:0.3f] set];
-                
+                [[UIColor clearColor] set];
+
                 UIRectFill(CGRectMake(roundf(width / 3 / 3 * j + width / 3 * i), borderPadding, 1.0f, roundf(height) - borderPadding * 2));
                 UIRectFill(CGRectMake(borderPadding, roundf(height / 3 / 3 * j + height / 3 * i), roundf(width) - borderPadding * 2, 1.0f));
             }
@@ -116,7 +117,8 @@
         if (self.showsGridMajor) {
             if (i > 0) {
                 [[UIColor whiteColor] set];
-                
+                [[UIColor clearColor] set];
+
                 UIRectFill(CGRectMake(roundf(width / 3 * i), borderPadding, 1.0f, roundf(height) - borderPadding * 2));
                 UIRectFill(CGRectMake(borderPadding, roundf(height / 3 * i), roundf(width) - borderPadding * 2, 1.0f));
             }

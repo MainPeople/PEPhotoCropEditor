@@ -360,6 +360,8 @@ static const CGFloat MarginLeft = 20.0f;
 - (CGRect)zoomedCropRect
 {
     CGRect cropRect = [self convertRect:self.scrollView.frame toView:self.zoomingView];
+    if (CGRectEqualToRect(self.insetRect, CGRectZero)) return cropRect;
+
     CGSize size = self.image.size;
     
     CGFloat ratio = 1.0f;
@@ -369,12 +371,12 @@ static const CGFloat MarginLeft = 20.0f;
     } else {
         ratio = CGRectGetHeight(AVMakeRectWithAspectRatioInsideRect(self.image.size, self.insetRect)) / size.height;
     }
-    
+
     CGRect zoomedCropRect = CGRectMake(cropRect.origin.x / ratio,
                                        cropRect.origin.y / ratio,
                                        cropRect.size.width / ratio,
                                        cropRect.size.height / ratio);
-    
+
     return zoomedCropRect;
 }
 

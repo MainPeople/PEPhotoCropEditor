@@ -10,6 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVFoundation.h>
 
+@class PECropRectView;
+
 @interface PECropView : UIView
 
 @property (nonatomic) UIImage *image;
